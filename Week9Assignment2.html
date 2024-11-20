@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        input[type="button"] {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        input[type="button"]:disabled {
+            background-color: grey;
+            cursor: not-allowed;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid black;
+            margin: 5px;
+        }
+        input[type="text"]:read-only {
+            display: flex;
+            margin: 10px auto;
+
+        }
+        a{
+            border: 2px solid black;
+            padding: 2px; 
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <script src="jquery-3.7.1.min.js"></script>
+    <a href="Week9Assignment.html">1st Assignment</a>
+    <div>
+        <input type="text" id="number1" name="textbox" placeholder="1st Number">
+        <input type="text" id="number2" name="textbox" placeholder="2nd Number"><br>
+        <input type="button" id="add" value="Add" disabled>
+        <input type="button" id="subtract" value="Subtract" disabled>
+        <input type="button" id="multiply" value="Multiply" disabled>
+        <input type="button" id="divide" value="Divide" disabled> <br>
+        <input type="text" id="result" name="textbox" placeholder="Result" readonly>
+    </div>
+    <script>
+        $(document).ready(function(){
+            function validateInputs() {
+                let number1 = parseFloat($('#number1').val());
+                let number2 = parseFloat($('#number2').val());
+                if (!isNaN(number1) && !isNaN(number2)) {
+                    $('#add, #subtract, #multiply, #divide').prop('disabled', false);
+                } else {
+                    $('#add, #subtract, #multiply, #divide').prop('disabled', true);
+                }
+            }
+
+            $('#number1, #number2').on('input', validateInputs);
+
+            $('#add').click(function(){
+                let number1 = parseFloat($('#number1').val());
+                let number2 = parseFloat($('#number2').val());
+                $('#result').val(number1 + number2);
+            });
+
+            $('#subtract').click(function(){
+                let number1 = parseFloat($('#number1').val());
+                let number2 = parseFloat($('#number2').val());
+                $('#result').val(number1 - number2);
+            });
+
+            $('#multiply').click(function(){
+                let number1 = parseFloat($('#number1').val());
+                let number2 = parseFloat($('#number2').val());
+                $('#result').val(number1 * number2);
+            });
+
+            $('#divide').click(function(){
+                let number1 = parseFloat($('#number1').val());
+                let number2 = parseFloat($('#number2').val());
+                if (number2 === 0) {
+                    $('#result').val("Cannot divide by zero");
+                } else {
+                    $('#result').val(number1 / number2);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
